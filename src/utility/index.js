@@ -15,41 +15,38 @@ let colors = [
 let getDataPoints = (data) => {
   let items = [];
   let totalCategory = 0;
+  let points = [];
+  let compact = [];
+  let dataPoints = [];
+
   for (let prop in data) {
     totalCategory++;
     let deepOne = data[prop];
-    for (let prop in deepOne) {
+    for (let prop in deepOne)
       items.push(deepOne[prop])
-    }
   }
 
-  let points = [];
   items.forEach(data => {
     if (typeof data === 'string') {
       data = data.slice(1, data.length)
       points.push(parseInt(data));
-    } else {
+    } else
       points.push(data);
-    }
   })
 
-  let chunckSize = points.length / totalCategory;
-
-  let compact = [];
-  for (let i = 0; i < totalCategory; i++) {
+  let chunckSize = (points.length / totalCategory);
+  for (let i = 0; i < totalCategory; i+=1) {
     let temp = [];
-    for (let j = 0; j < chunckSize; j++) {
+    for (let j = 0; j < chunckSize; j+=1) {
       temp[j] = points[0];
-      points.shift()
+      points.shift();
     }
     compact.push(temp);
   }
 
-  let dataPoints = [];
-  for (let i = 0; i < compact[0].length; i += 1) {
-    for (let j = 0; j < compact.length; j += 1) {
+  for (let i = 0; i < compact[0].length; i+=1) {
+    for (let j = 0; j < compact.length; j+=1)
       dataPoints.push(compact[j][i]);
-    }
   }
 
   return dataPoints;
@@ -63,9 +60,8 @@ let getDataPoints = (data) => {
  */
 let getCategories = (data) => {
   let categories = [];
-  for (let category in data) {
+  for (let category in data)
     categories.push(category);
-  }
 
   return categories;
 }
@@ -80,14 +76,11 @@ let getStates = (data) => {
   let states = [];
   for (let categories in data) {
     let categoriesObj = data[categories];
-    for (let state in categoriesObj) {
+    for (let state in categoriesObj)
       states.push(state);
-    }
   }
   // find unique values.
-  states = states.filter(function (x, i, a) {
-    return a.indexOf(x) == i;
-  });
+  states = states.filter((x, i, a) => a.indexOf(x) == i);
 
   return states;
 }
@@ -98,9 +91,7 @@ let getStates = (data) => {
  * @param {*} categories
  * @returns returns colors for categories
  */
-let getColors = (categoriesLength) => {
-  return colors.slice(0, categoriesLength)
-}
+let getColors = (categoriesLength) =>  colors.slice(0, categoriesLength);
 
 /**
  *
@@ -111,9 +102,8 @@ let getColors = (categoriesLength) => {
  */
 let getCategoryAndColor = (categories, colors) => {
   let categoryAndColor = [];
-  for (let i = 0; i < categories.length; i++) {
+  for (let i = 0; i < categories.length; i++)
     categoryAndColor.push({ category: categories[i], color: colors[i]})
-  }
 
   return categoryAndColor;
 }

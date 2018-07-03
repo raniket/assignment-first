@@ -4,8 +4,8 @@
       <v-flex xs-10 sm-10 offset-sm1 offset-xs1>
         <v-card width="90%" >
           <h2 class='title text-sm-center text-xs-center pt-2' >{{ title }}</h2>
-          <section id="chart" ></section> 
-          <section id="footer">
+          <section class="text-sm-center" id="chart" ></section> 
+          <section class="text-sm-center" id="footer">
           </section>
         </v-card>
       </v-flex>
@@ -21,7 +21,7 @@ import * as utility from '../utility'
 export default {
   data() {
     return {
-      title: 'D3 Data Visualization',
+      title: 'D3 Data Visualization'
     }
   },
 
@@ -44,7 +44,7 @@ export default {
     let colors = utility.getColors(categories.length);
 
     // draw chart.
-    var chart = d3.select('#chart').append('svg')
+    let chart = d3.select('#chart').append('svg')
       .attr('width', width + margin.left + margin.right)
       .attr('height', height + margin.top + margin.bottom)
       .append('g')
@@ -73,16 +73,15 @@ export default {
         .duration(1000)
         .ease('elastic');
 
-
       // draw y-axis.
-      var vGuideScale = d3.scale.linear().domain([0, d3.max(barData)]).range([height,0]);
+      let vGuideScale = d3.scale.linear().domain([0, d3.max(barData)]).range([height,0]);
 
-      var vAxis = d3.svg.axis()
+      let vAxis = d3.svg.axis()
           .scale(vGuideScale)
           .orient('left')
           .ticks(10);
 
-      var vGuide = d3.select('svg').append('g');
+      let vGuide = d3.select('svg').append('g');
           vAxis(vGuide);
           vGuide.attr('transform', 'translate('+ margin.left + ', ' + margin.top + ')');
           vGuide.selectAll('path')
@@ -91,14 +90,14 @@ export default {
           .style({ stroke: '#000'});
 
       // draw x-axis.
-      var bottomScale =  d3.scale.ordinal().domain(states).rangeBands([0, width]);
+      let bottomScale =  d3.scale.ordinal().domain(states).rangeBands([0, width]);
 
-      var hAxis = d3.svg.axis()
-      .scale(bottomScale)
-      .orient('bottom')
-      .tickValues(bottomScale.domain());
+      let hAxis = d3.svg.axis()
+          .scale(bottomScale)
+          .orient('bottom')
+          .tickValues(bottomScale.domain());
 
-      var hGuide = d3.select('svg').append('g');
+      let hGuide = d3.select('svg').append('g');
           hAxis(hGuide);
           hGuide.attr('transform', 'translate('+ margin.left + ', ' + (height + margin.top) + ')');
           hGuide.selectAll('path')
@@ -107,7 +106,7 @@ export default {
           .style({ stroke: '#000'});
 
 
-      // draw category color in footer.
+      // draw category and coresponding color in footer.
       let categoryAndColor = utility.getCategoryAndColor(categories, colors);
 
       d3.select('#footer').selectAll('div')
@@ -127,8 +126,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>
-
