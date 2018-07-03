@@ -1,4 +1,4 @@
-# assignment-firts
+# data visualization with d3
 
 > Program to get data from given Json file(data.json) and visualize it on a web page using d3.js
 
